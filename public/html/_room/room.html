@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font: 13px Helvetica, Arial; }
+        footer {position: fixed; bottom: 0; width: 100%; text-align: center; padding: 10px;}
+        form { background: #000; padding: 3px; position: fixed; bottom: 50px; width: 100%; }
+        form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+        form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+        #messages { list-style-type: none; margin: 0; padding: 0; }
+        #messages li { padding: 5px 10px; background: rgb(255, 205, 205); }
+        #messages li:nth-child(odd) { background: rgb(202, 86, 86); }
+      </style>
+</head>
+<body>
+    <header>
+
+    </header>
+
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+  $(function () {
+    var socket = io();
+    $('form').submit((e) => {
+      e.preventDefault(); // prevents page reloading
+      socket.emit('chat message', $('#m').val());
+      $('#m').val('');
+      return false;
+    });
+    socket.on('chat message', (msg) => {
+      $('#messages').append($('<li>').text(msg));
+    });
+  });
+</script>
+<footer>
+    <p>2019 - by HACKETEIROS</p>
+    <a href="https://github.com/mablds/server-chat">GitHub</p>
+</footer>
+</body>
+</html>
+
+
+    <!-- <div class="container">
+        <div id= "display">
+            <div id= "chatLog"></div>
+
+            <div id= "message">
+                <input type="text" placeholder="Digite uma mensagem">
+            </div>
+
+            <button id = "send" >Enviar</button>
+        </div>
+        
+        <div id= "online"></div>
+
+        <button id = "send" >Enviar</button>
+    </div> -->
